@@ -25,7 +25,7 @@ impl Command {
     match self.ctype {
       CommandType::NICKNAME => {
         let mut temp = curr_user;
-        temp.push_str(&"has changed nickname to ".to_string());
+        temp.push_str(&" has changed nickname to ".to_string());
         temp.push_str(&self.args);
         return temp;
       },
@@ -44,7 +44,7 @@ impl FromStr for Command {
 
   fn from_str(s: &str) -> Result<Self, Self::Err> {
     if !s.starts_with("/") {
-      return Err(());
+      return Err(Error::new(ErrorKind::Other, "Command should start with /");
     }
     
 
@@ -56,7 +56,7 @@ impl FromStr for Command {
     };
 
     if ctype == CommandType::INVALID {
-      return Err(());
+      return Err(Error::new(ErrorKind::Other, "Invalid command type"));
     }
 
     let args = temp[1..].join(" ");
